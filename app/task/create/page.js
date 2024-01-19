@@ -2,7 +2,7 @@
 import React from 'react'
 import Link from "next/link";
 
-export default function page() {
+export default function Page() {
     const apiKey = process.env.NEXT_PUBLIC_API_KEY;
     const handleSubmit = (e) => {
         e.preventDefault();

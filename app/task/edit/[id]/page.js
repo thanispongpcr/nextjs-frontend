@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react'
 import Link from "next/link";
 
-export default function page({ params }) {
+export default function Page({ params }) {
     const apiKey = process.env.NEXT_PUBLIC_API_KEY;
     const [task, setTask] = useState({
         "id": 0,
