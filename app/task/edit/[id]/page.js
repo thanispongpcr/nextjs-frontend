@@ -4,11 +4,7 @@ import Link from "next/link";
 
 export default function Page({ params }) {
     const apiKey = process.env.NEXT_PUBLIC_API_KEY;
-    const [task, setTask] = useState({
-        "id": 0,
-        "topic": "",
-        "message": ""
-    })
+    const [task, setTask] = useState({})
     useEffect(() => {
         fetch(apiKey + 'listone/' + params.id)
             .then(res => res.json())
@@ -38,24 +34,18 @@ export default function Page({ params }) {
     }
     return (
         <div>
-            <link
-                href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-                rel="stylesheet"
-                integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-                crossorigin="anonymous"
-            />
-            <div class="container my-4">
-                <div class="text-center">
-                    <h1>Edit Task</h1>
+            <div className="kanit-regular container my-4">
+                <div className="text-center">
+                    <h1><b>Edit Task</b></h1>
                 </div>
 
                 <div>
                     <form onSubmit={handleSubmit}>
                         <div>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Topic</label>
+                            <div className="mb-3">
+                                <label for="exampleInputEmail1" className="form-label"><b>Topic</b></label>
                                 <input
-                                    class="form-control"
+                                    className="form-control"
                                     type='text'
                                     placeholder='topic...'
                                     id='topic'
@@ -69,10 +59,10 @@ export default function Page({ params }) {
                                     }}
                                 />
                             </div>
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Message</label>
-                                <input
-                                    class="form-control"
+                            <div className="mb-3">
+                                <label for="exampleInputEmail1" className="form-label"><b>Message</b></label>
+                                <textarea
+                                    className="form-control"
                                     type='text'
                                     placeholder='message...'
                                     id='message'
@@ -84,12 +74,51 @@ export default function Page({ params }) {
                                             message: e.target.value
                                         }))
                                     }}
-                                />
+                                ></textarea>
                             </div>
-
-                            <div class="text-end">
-                                <Link type="button" class="btn btn-light me-2" href="/task">Back</Link>
-                                <button type="submit" class="btn btn-info">Add task</button>
+                            <div className='row'>
+                                <div className="mb-3 col-md-6">
+                                    <label for="priority" className="form-label"><b>Priority</b></label>
+                                    <select
+                                        className="form-select"
+                                        id="priority"
+                                        name="priority"
+                                        value={task.priority} // กำหนดค่าปัจจุบัน
+                                        onChange={(e) => {
+                                            setTask((task) => ({
+                                                ...task,
+                                                priority: e.target.value
+                                            }))
+                                        }}
+                                    >
+                                        <option value="high">เร่งด่วน</option>
+                                        <option value="medium">ปานกลาง</option>
+                                        <option value="low">ไม่เร่งด่วน</option>
+                                    </select>
+                                </div>
+                                <div className="mb-3 col-md-6">
+                                    <label for="status" className="form-label"><b>Status</b></label>
+                                    <select
+                                        className="form-select"
+                                        id="status"
+                                        name="status"
+                                        value={task.status} // กำหนดค่าปัจจุบัน
+                                        onChange={(e) => {
+                                            setTask((task) => ({
+                                                ...task,
+                                                status: e.target.value
+                                            }))
+                                        }}
+                                    >
+                                        <option value="todo">รอดำเนินการ</option>
+                                        <option value="in_progress">กำลังดำเนินการ</option>
+                                        <option value="done">เสร็จสิ้น</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div className="text-end">
+                                <Link type="button" className="btn btn-light me-2" href="/task">Back</Link>
+                                <button type="submit" className="btn btn-info">Edit task</button>
                             </div>
                         </div>
                     </form>

@@ -8,7 +8,8 @@ export default function Page() {
         e.preventDefault();
         const data = {
             "topic": e.target.topic.value,
-            "message": e.target.message.value
+            "message": e.target.message.value,
+            "priority": e.target.priority.value,
         }
         fetch(apiKey + 'create', {
             method: 'POST',
@@ -24,41 +25,48 @@ export default function Page() {
     }
     return (
         <div>
-            <link
-                href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-                rel="stylesheet"
-                integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-                crossorigin="anonymous"
-            />
-            <div class="container my-4">
-                <div class="text-center">
-                    <h1>Create Task</h1>
+            <div className="kanit-regular container my-4">
+                <div className="text-center">
+                    <h1><b>Create Task</b></h1>
                 </div>
                 <div>
                     <form onSubmit={handleSubmit}>
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label"><b>Topic</b></label>
+                        <div className="mb-3">
+                            <label for="exampleInputEmail1" className="form-label"><b>Topic</b></label>
                             <input
-                                class="form-control"
+                                className="form-control"
                                 type='text'
                                 placeholder='topic...'
                                 id='topic'
                                 name='topic'
                             />
                         </div>
-                        <div class="mb-3">
-                            <label for="exampleInputEmail1" class="form-label"><b>Message</b></label>
-                            <input
-                                class="form-control"
+                        <div className="mb-3">
+                            <label for="exampleInputEmail1" className="form-label"><b>Message</b></label>
+                            <textarea
+                                className="form-control"
                                 type='text'
                                 placeholder='message...'
                                 id='message'
                                 name='message'
-                            />
+                            >
+                            </textarea>
                         </div>
-                        <div class="text-end">
-                            <Link type="button" class="btn btn-light me-2" href="/task">Back</Link>
-                            <button type="submit" class="btn btn-info">Add task</button>
+                        <div className="mb-3">
+                            <label for="priority" className="form-label"><b>Priority</b></label>
+                            <select
+                                className="form-select"
+                                id="priority"
+                                name="priority"
+                            >
+                                <option value="high">เร่งด่วน</option>
+                                <option value="medium">ปานกลาง</option>
+                                <option value="low">ไม่เร่งด่วน</option>
+                            </select>
+                        </div>
+                        <div className="text-end">
+                            <Link type="button" className="btn btn-light me-2" href="/task">Back</Link>
+                            <button type="submit" className="btn btn-info">Add task</button>
                         </div>
                     </form>
                 </div>
