@@ -60,6 +60,7 @@ export default function Page() {
             task.topic.toLowerCase().includes(searchTermLowerCase)
         );
     });
+    
     return (
         <div>
             <div className="kanit-regular container my-4">
@@ -68,7 +69,7 @@ export default function Page() {
                 </div>
                 <div className="text-end mb-2">
                     <Link type="button" className="btn btn-light" href="/task/create">
-                        Create Task
+                        เพิ่มรายการ
                     </Link>
                 </div>
 
@@ -93,7 +94,7 @@ export default function Page() {
                         <input
                             className="form-control"
                             type="text"
-                            placeholder="Search topic"
+                            placeholder="ค้นหารายการ"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                         />
@@ -113,18 +114,18 @@ export default function Page() {
                                         </div>
                                         <div className="col-md-3 text-end">
                                             <span className="badge text-bg-light">
-                                                <i><u>{task.status === 'todo' ? 'รอดำเนินการ' : task.status === 'in_progress' ? 'กำลังดำเนินการ' : 'เสร็จสิ้น'}</u></i>
+                                               สถานะ: <i><u>{task.status === 'todo' ? 'รอดำเนินการ' : task.status === 'in_progress' ? 'กำลังดำเนินการ' : 'เสร็จสิ้น'}</u></i>
                                             </span>
                                         </div>
                                     </div>
                                     <p className="card-text">
                                         <b>
-                                            <span className={`badge ${task.priority === 'high' ? 'bg-danger' : task.priority === 'medium' ? 'bg-warning' : 'bg-success'} me-1`}>
+                                            <span className={`badge ${task.priority === 'high' ? 'bg-danger' : task.priority === 'medium' ? 'bg-warning text-black' : 'bg-success'} me-1`}>
                                                 <i><u>{task.priority === 'high' ? 'เร่งด่วน' : task.priority === 'medium' ? 'ปานกลาง' : 'ไม่เร่งด่วน'}</u></i>
                                             </span>
-                                            <span className="badge bg-secondary">Created at: {formatToThaiTime(task.created_at)}</span>
+                                            <span className="badge bg-secondary text-black">สร้าง: {formatToThaiTime(task.created_at)} น.</span>
                                             {task.created_at !== task.updated_at && (
-                                                <span className="ms-1 badge bg-secondary">Updated at: {formatToThaiTime(task.updated_at)}</span>
+                                                <span className="ms-1 badge bg-secondary text-black">แก้ไขล่าสุด: {formatToThaiTime(task.updated_at)} น.</span>
                                             )}
 
                                         </b>
